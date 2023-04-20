@@ -1,0 +1,5 @@
+Hello//Single-line:"Hello"
+// \"String? Nope\"\r\nTest:"Test"
+/*\r\n    * \"This  is not String either\"\r\n    */Testing2:Testing2
+//Complex */ \r\nTesting new //comment\r\n,    ///*More complex*/:"Testing new ,    "
+/*Single line, but */:""
