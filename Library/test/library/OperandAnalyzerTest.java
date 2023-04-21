@@ -14,8 +14,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Random;
 
+import org.junit.experimental.categories.Category;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -43,6 +45,9 @@ class OperandAnalyzerTest {
 	//Test with ambiguous strings as function parameters 
 	@ParameterizedTest
 	@CsvSource({"2","3","10","4"})
+	@Tag("ParameterizedTest")
+	@Tag("MockitoTest")
+	@Tag("FakerTest")
 	@DisplayName("Test with faker generated operands and operators")
 	void test(int count) {
 		final String operandRegex = "[\\(]*(_*([A-Za-z0-9]|__)+(\\.\\w|\\w|\\(((\\w|\\w\\.\\w)*|\\\"(_*([A-Za-z0-9]|__)+(\\.\\w|\\w)*\\s*(\\+|-|\\*|\\/|%|&|\\||\\^|=|\\+=|-=|\\/=|\\*=|%=|&=|\\|=|\\^=|&&|\\|\\||!|\\<|\\<=|\\>|\\>=|==|!=)\\s*(_*([A-Za-z0-9]|__)+(\\.\\w|\\w)*)\\\")|,)*\\))*)";
@@ -61,6 +66,8 @@ class OperandAnalyzerTest {
 	}
 	
 	@RepeatedTest(10)
+	@Tag("MockitoTest")
+	@Tag("RepeatedTest")
 	@DisplayName("Test using Randomize and list of operands")
 	void repeatedTest() {		
 		final String[] operands = new String[] {"A_class.func1(\"a+b\")","func2(a,b,c)","__.num(\"Hey\").a","abc123.__(\"param1\",2).func1(1,\"1==2\")"};	
@@ -75,6 +82,9 @@ class OperandAnalyzerTest {
 	}
 	
 	@RepeatedTest(10)
+	@Tag("RepeatedTest")
+	@Tag("MockitoTest")
+	@Tag("FakerTest")
 	@DisplayName("Test Incrementation operations")
 	void TestFaker() {
 		Faker faker = new Faker();
@@ -101,6 +111,7 @@ class OperandAnalyzerTest {
 	//Integration with Document class
 	@Test
 	@DisplayName("Testing operands in a java file")
+	@Tag("IntegrationTest")
 	void DocumentTest() {
 		Document document;
 		try {

@@ -15,9 +15,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.platform.suite.api.IncludeTags;
 
 import com.github.javafaker.Faker;
 
@@ -36,6 +39,9 @@ class OperatorFinderTest {
 	
 	// testing format "a = --i"
 	@RepeatedTest(10)
+	@Tag("RepeatedTest")
+	@Tag("FakerTest")
+	@Tag("ParameterizedTest")
 	@DisplayName("Test Incrementation operations with faker")
 	void TestFaker() {
 		Faker faker = new Faker();
@@ -48,6 +54,9 @@ class OperatorFinderTest {
 	
 	//Integration with ambiguous string remover
 	@RepeatedTest(10)
+	@Tag("RepeatedTest")
+	@Tag("IntegrationTest")
+	@Tag("FakerTest")
 	@DisplayName("Test logical operators")
 	void TestLogical() {
 		AmbiguousStringRemover asr;
@@ -64,6 +73,8 @@ class OperatorFinderTest {
 	}
 	
 	@RepeatedTest(10)
+	@Tag("FakerTest")
+	@Tag("RepeatedTest")
 	@DisplayName("Test relational operators")
 	void TestRelational() {
 		Faker faker = new Faker();
@@ -77,6 +88,9 @@ class OperatorFinderTest {
 	}
 	
 	@RepeatedTest(10)
+	@Tag("IntegrationTest")
+	@Tag("FakerTest")
+	@Tag("RepeatedTest")
 	@DisplayName("Test single operators")
 	void TestSingle() {
 		AmbiguousStringRemover asr;
@@ -94,6 +108,8 @@ class OperatorFinderTest {
 	
 	@RepeatedTest(10)
 	@DisplayName("Test double operators")
+	@Tag("FakerTest")
+	@Tag("RepeatedTest")
 	void TestDouble() {
 		AmbiguousStringRemover asr;
 		Faker faker = new Faker();
@@ -109,6 +125,8 @@ class OperatorFinderTest {
 	}
 	
 	@RepeatedTest(10)
+	@Tag("FakerTest")
+	@Tag("RepeatedTest")
 	@DisplayName("Test double operators with Incrementation operations")
 	void TestDouble2() {
 		Faker faker = new Faker();

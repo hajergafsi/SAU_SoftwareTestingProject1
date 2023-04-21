@@ -14,7 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 
+import org.junit.experimental.categories.Category;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -40,6 +42,8 @@ class CommentFinderTest {
  	}
 	
 	@ParameterizedTest
+	@Tag("ParameterizedTest")
+	@Tag("IntegrationTest")
 	@DisplayName("Comment detecter test")
 	@CsvFileSource(resources = "./comments.csv",delimiter= ':')
 	void commentRegexTest(String comment, String afterFormat) throws IOException {
@@ -50,6 +54,7 @@ class CommentFinderTest {
 	
 	@Test
 	@DisplayName("Comment detector test with mock")
+	@Tag("MockitoTest")
 	void CommentTest() {
 		IGenerator commentGenerator = Mockito.mock(IGenerator.class);
 		IGenerator codeGenerator = Mockito.mock(IGenerator.class);

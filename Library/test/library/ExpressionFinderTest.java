@@ -11,13 +11,16 @@ package library;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.experimental.categories.Category;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.platform.suite.api.IncludeTags;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -40,6 +43,7 @@ class ExpressionFinderTest {
 	
 	//Integration with operatorFinder
 	@ParameterizedTest
+	@Tag("ParameterizedTest")
 	@CsvSource(value={"(e.hash == hash && ((k = e.key) == key || key.equals(k))) {:5","b = j ++ - -- k;:4"},delimiter=':')
 	@DisplayName("Test that calculates total number of operators")
 	void CalculateTotalOpsTest(String text,int count) {
@@ -49,6 +53,7 @@ class ExpressionFinderTest {
 	
 	//Integration with Document class
 	@Test
+	@Tag("IntegrationTest")
 	@DisplayName("Testing numerical opertaors in a java file")
 	void DocumentTest() {
 		Document document;
@@ -79,8 +84,10 @@ class ExpressionFinderTest {
 	}
 	
 	@ParameterizedTest
+	@Tag("ParameterizedTest")
 	@CsvSource({"2","5","1","3","5"})
 	@DisplayName("Testing by generating expressions")
+	@Tag("MockitoTest")
 	void TestWithMock(int count) {
 		IGenerator expressionGenerator = Mockito.mock(IGenerator.class); 
 		String generated = createExp(count);

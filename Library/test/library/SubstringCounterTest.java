@@ -12,7 +12,9 @@ package library;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.experimental.categories.Category;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -22,6 +24,7 @@ class SubstringCounterTest {
 	private SubstringCounter Sc;
 	
 	@ParameterizedTest
+	@Tag("ParameterizedTest")
 	@DisplayName("Simple Test")
 	@CsvSource({"a + b = c - d+g,+,2 ","a-(a &&true &&b) ==\"aa\"&&\"aq\",&&,3","true |false\\n|aa|b -c,|,3","q-"
 			+ "ee-a=12,-,2"})

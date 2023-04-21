@@ -17,9 +17,11 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.junit.experimental.categories.Category;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -39,6 +41,7 @@ class DocumentTest {
 	
 	//Test regex expression (should not match any file with extension other .java)
 	@ParameterizedTest
+	@Tag("ParameterizedTest")
 	@DisplayName("Regex test with file extentions other than java")
 	@CsvSource({"porro.js","perspiciatis.java.webm","perferendis.odp","voluptates.docx","modi.avi", "vel.jpg"})
 	void regexNegativeTest(String name) {
@@ -48,6 +51,7 @@ class DocumentTest {
 	
 	//Test regex expression (should not match any file with extension other .java)
 	@ParameterizedTest
+	@Tag("ParameterizedTest")
 	@DisplayName("Regex test with java files")
 	@CsvSource({"porro.java","perspiciatis.class.java","perfer-endis1234.java","voluptates@.java","123modi.java"})
 	void regexPositiveTest(String name) {
@@ -57,6 +61,8 @@ class DocumentTest {
 	
 	//Test class behavior when a file with wrong extension is sent (should throw an error)
 	@RepeatedTest(10)
+	@Tag("RepeatedTest")
+	@Tag("RepeatedTest")
 	@DisplayName("File extention test")
 	void fileExtentionTest() throws Exception {	
 		faker = new Faker();
@@ -75,7 +81,6 @@ class DocumentTest {
 		
 	}
 	
-	//Integration test
 	//Test with an unexisting file (should throw IOException)
 	@Test
 	@DisplayName("Inexitant File test")

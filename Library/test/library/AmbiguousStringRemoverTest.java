@@ -11,8 +11,10 @@ package library;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.experimental.categories.Category;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -26,6 +28,8 @@ class AmbiguousStringRemoverTest {
 	private AmbiguousStringRemover AMR;
 	
 	@ParameterizedTest
+	@Category(ParameterizedTest.class)
+	@Tag("ParameterizedTest")
 	@CsvSource({"\"a=b-c+(24-h);\" + 24 = 250,param + 24 = 250"})
 	void simpleOperationTest(String text,String expected) {
 		AMR = new AmbiguousStringRemover(text);
@@ -34,8 +38,10 @@ class AmbiguousStringRemoverTest {
 	}
 	
 	@ParameterizedTest
+	@Tag("ParameterizedTest")
+	@DisplayName("moderate Complexity Operation Test")
 	@CsvSource(value={"func(\"a+b\",\"test == true\" ) = true:func(param,param ) = true","foo(\"a==b\",\"__test++\"):foo(param,param)"},delimiter= ':')
-	void moedrateComplexityOperationTest(String text,String expected) {
+	void moderateComplexityOperationTest(String text,String expected) {
 		AMR = new AmbiguousStringRemover(text);
 		String result = AMR.replaceAmbiguous();
 		assertEquals(expected,result);
@@ -54,6 +60,7 @@ class AmbiguousStringRemoverTest {
 	
 	// testing format "--i"
 	@RepeatedTest(10)
+	@Tag("RepeatedTest")
 	@DisplayName("Test Incrementation Inside String")
 	void TestFaker2() {
 		Faker faker = new Faker();

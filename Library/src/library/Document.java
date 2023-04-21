@@ -88,7 +88,6 @@ public class Document {
 	}
 	
 	public void AnalyzeFunctions() {
-		
 		FD = new FunctionDetector(code);
 		this.numberOfFunctions = FD.Analyze();
 	}
@@ -97,18 +96,18 @@ public class Document {
 		return this.numberOfNumericOperators;
 	}
 	
-	public int getNumberOfLogicalOperators() {
+	public int getNumberOfLogicalOperators() {
 		return this.numberOfLogicalOperators;
 	}
 	
-	public int getNumberOfRelationalOperators() {
+	public int getNumberOfRelationalOperators() {
 		return this.numberOfRelationalOperators;
 	}
-	public int getNumberOfDoubleOperators() {
+	public int getNumberOfDoubleOperators() {
 		return this.numberOfDoubleOperators;
 	}
 	
-	public int getNumberOfSingleOperators() {
+	public int getNumberOfSingleOperators() {
 		return this.numberOfSingleOperators;
 	}
 	

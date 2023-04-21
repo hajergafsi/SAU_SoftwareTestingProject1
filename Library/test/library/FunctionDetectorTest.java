@@ -12,6 +12,7 @@ package library;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -29,6 +30,7 @@ class FunctionDetectorTest {
 	
 	//integration test
 	@ParameterizedTest
+	@Tag("IntegrationTest")
 	@DisplayName("Testing the project java files by Integrating the Document class")
 	@CsvSource(value={"FunctionDetector.java:2","AmbiguousStringRemover.java:2","OperatorFinder.java:4","IAnalyzer.java:1","Document.java:13"},delimiter= ':')
 	void testWithDocument(String filePath,int funcNmbr) {
