@@ -64,8 +64,9 @@ public class ExpressionFinder{
         	default: break;
         	}
         	cleaned = cleaned.substring(0, matcher.start()) + OF.getText() + cleaned.substring(matcher.end());
+        	
         }	
-        
+        //System.out.println(numCount);
         if(operatorType == EOperator.numerical || operatorType == EOperator.doubleOp) {
         	matcher = incPattern.matcher(cleaned);
         	while (matcher.find()) {

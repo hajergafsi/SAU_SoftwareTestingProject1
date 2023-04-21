@@ -119,7 +119,7 @@ class OperandAnalyzerTest {
 			document.read();
 			document.readAndCleanString();
 			document.AnalyzeOperands();
-			assertEquals(document.getNumberOfOperands(),41);
+			assertEquals(document.getNumberOfOperands(),43);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

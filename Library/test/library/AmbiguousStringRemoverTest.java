@@ -29,7 +29,7 @@ class AmbiguousStringRemoverTest {
 	
 	@ParameterizedTest
 	@Tag("ParameterizedTest")
-	@CsvSource({"\"a=b-c+(24-h);\" + 24 = 250,param + 24 = 250"})
+	@CsvSource(value={"\"a=b-c+(24-h);\" + 24 = 250:param + 24 = 250","\"int a = array[5] - 10;\":param","\"number[getLength(\"word\")] = 2;\":param","\"result = array[index]--;\":param","System.out.print(\"array[index++]\");:System.out.print(param);","System.out.print(\"array[ index++ + arr[2 ]]\");:System.out.print(param);"},delimiter=':')
 	void simpleOperationTest(String text,String expected) {
 		AMR = new AmbiguousStringRemover(text);
 		String result = AMR.replaceAmbiguous();

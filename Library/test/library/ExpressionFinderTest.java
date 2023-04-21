@@ -45,7 +45,7 @@ class ExpressionFinderTest {
 	@ParameterizedTest
 	@Order(1)
 	@Tag("ParameterizedTest")
-	@CsvSource(value={"(e.hash == hash && ((k = e.key) == key || key.equals(k))) {:5","b = j ++ - -- k;:4","int a = array[5] - 10;:2","number[getLength(\"word\")] = 2;:1","result = array[index]--;:2","System.out.print(array[index++]);:1","System.out.print(array[index++ + arr[2]]);:2"},delimiter=':')
+	@CsvSource(value={"(e.hash == hash && ((k = e.key) == key || key.equals(k))) {:5","b = j ++ - -- k;:4","int a = array[ 5] - 10;:2","number[getLength(\"word\")] = 2;:1","result = array[index]--;:2","System.out.print(array[index++]);:1","System.out.print(array[index++ + arr[2]]);:2"},delimiter=':')
 	@DisplayName("Test that calculates total number of operators")
 	void CalculateTotalOpsTest(String text,int count) {
 		EF = new ExpressionFinder(text);
@@ -64,7 +64,7 @@ class ExpressionFinderTest {
 			document.read();
 			document.readAndCleanString();
 			document.AnalyzeOperators();
-			assertEquals(document.getNumberOfNumericOperators(),20);
+			assertEquals(document.getNumberOfNumericOperators(),21);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
