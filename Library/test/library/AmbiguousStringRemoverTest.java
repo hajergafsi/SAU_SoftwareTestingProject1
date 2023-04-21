@@ -28,7 +28,6 @@ class AmbiguousStringRemoverTest {
 	private AmbiguousStringRemover AMR;
 	
 	@ParameterizedTest
-	@Category(ParameterizedTest.class)
 	@Tag("ParameterizedTest")
 	@CsvSource({"\"a=b-c+(24-h);\" + 24 = 250,param + 24 = 250"})
 	void simpleOperationTest(String text,String expected) {
@@ -69,6 +68,5 @@ class AmbiguousStringRemoverTest {
 		String result = AMR.replaceAmbiguous();
 		assertEquals(result,"param");
 	}
-
 	
 }

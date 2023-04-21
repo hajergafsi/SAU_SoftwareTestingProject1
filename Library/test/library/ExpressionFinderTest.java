@@ -43,8 +43,9 @@ class ExpressionFinderTest {
 	
 	//Integration with operatorFinder
 	@ParameterizedTest
+	@Order(1)
 	@Tag("ParameterizedTest")
-	@CsvSource(value={"(e.hash == hash && ((k = e.key) == key || key.equals(k))) {:5","b = j ++ - -- k;:4"},delimiter=':')
+	@CsvSource(value={"(e.hash == hash && ((k = e.key) == key || key.equals(k))) {:5","b = j ++ - -- k;:4","int a = array[5] - 10;:2","number[getLength(\"word\")] = 2;:1","result = array[index]--;:2","System.out.print(array[index++]);:1","System.out.print(array[index++ + arr[2]]);:2"},delimiter=':')
 	@DisplayName("Test that calculates total number of operators")
 	void CalculateTotalOpsTest(String text,int count) {
 		EF = new ExpressionFinder(text);
@@ -54,6 +55,7 @@ class ExpressionFinderTest {
 	//Integration with Document class
 	@Test
 	@Tag("IntegrationTest")
+	@Order(3)
 	@DisplayName("Testing numerical opertaors in a java file")
 	void DocumentTest() {
 		Document document;
@@ -62,7 +64,7 @@ class ExpressionFinderTest {
 			document.read();
 			document.readAndCleanString();
 			document.AnalyzeOperators();
-			assertEquals(document.getNumberOfNumericOperators(),19);
+			assertEquals(document.getNumberOfNumericOperators(),20);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,6 +90,7 @@ class ExpressionFinderTest {
 	@CsvSource({"2","5","1","3","5"})
 	@DisplayName("Testing by generating expressions")
 	@Tag("MockitoTest")
+	@Order(2)
 	void TestWithMock(int count) {
 		IGenerator expressionGenerator = Mockito.mock(IGenerator.class); 
 		String generated = createExp(count);

@@ -64,7 +64,7 @@ public class OperatorFinder {
 	    
 	List<Match> incrementationMatches;
 	
-	final String incrementRegex = "[\\(]*(\\s*(--|\\+\\+)\\s*)_*([A-Za-z0-9]|__)+(\\.\\w|\\w|\\(([^\\)\\\"]|\\\".*\\\")*\\))*|[\\(]*_*([A-Za-z0-9]|__)+(\\.\\w|\\w|\\(([^\\)\\\"]|\\\".*\\\")*\\))*(\\s*(--|\\+\\+))";
+	final String incrementRegex = "[\\(]*(\\s*(--|\\+\\+)\\s*)_*([A-Za-z0-9]|__)+(\\.\\w|\\w|\\(([^\\)\\\"]|\\\".*\\\")*\\)|\\[([^\\]\\\"]|\\\".*\\\")+\\])*|[\\(]*_*([A-Za-z0-9]|__)+(\\.\\w|\\w|\\(([^\\)\\\"]|\\\".*\\\")*\\)|\\[([^\\]\\\"]|\\\".*\\\")+\\])*(\\s*(--|\\+\\+))";
 	
 	public OperatorFinder(EOperator operatorType,String text) {
 		
@@ -187,7 +187,6 @@ public class OperatorFinder {
 		Matcher matcher = incrementPattern.matcher(text);
 		this.incrementationMatches = new ArrayList<Match>();
         while (matcher.find()) {
-        	//System.out.println(matcher.group());
         	Match match = new Match();       
 	        match.start = matcher.start();
 	        match.text = matcher.group();
@@ -195,7 +194,6 @@ public class OperatorFinder {
 	        incrementationMatches.add(match);
 	        this.text = text.replace(match.text,"operator");
 	        opCount++;         	
-            //matcher.group(3) gives you the operator
         }
         return opCount;
 	}
@@ -206,25 +204,19 @@ public class OperatorFinder {
 		int inc = detectIncrementingOperators();
 		matcher = pattern.matcher(text);
         while (matcher.find()) {
-            //System.out.println("Full match: " + matcher.group(0));
                 for (String op: this.simpleOperators) {
                 	SC = new SubstringCounter(matcher.group(),op);
-                	//System.out.println(op+" "+SC.countMatches());
                 	count += SC.countMatches();
                 }            	
-            //matcher.group(3) gives you the operator
         }
         
         if(operatorType == EOperator.numerical || operatorType == EOperator.relational) {
     		matcher = pattern2.matcher(text);
             while (matcher.find()) {
-                //System.out.println("Full match: " + matcher.group(0));
                     for (String op: this.complexOperators) {
                     	SC = new SubstringCounter(matcher.group(),op);
-                    	//System.out.println(op+" "+SC.countMatches());
                     	count += SC.countMatches();
                     }            	
-                //matcher.group(3) gives you the operator
             }      	
         }
 

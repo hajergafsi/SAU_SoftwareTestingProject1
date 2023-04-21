@@ -75,7 +75,9 @@ public class Document {
 	
 	public void AnalyzeOperators() {
 		EF = new ExpressionFinder(code);
+		
 		this.numberOfNumericOperators = EF.Analyze(EOperator.numerical);
+		
 		this.numberOfLogicalOperators = EF.Analyze(EOperator.logical);
 		this.numberOfRelationalOperators = EF.Analyze(EOperator.relational);
 		this.numberOfDoubleOperators = EF.Analyze(EOperator.doubleOp);
@@ -118,5 +120,3 @@ public class Document {
 		return this.numberOfOperands;
 	}
 }
-
-
