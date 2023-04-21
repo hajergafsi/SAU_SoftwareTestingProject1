@@ -15,9 +15,8 @@ import java.util.regex.Pattern;
 public class ExpressionFinder{	
 	
 	private String code;
-	final String regex = "\\s*([\\(]*((\\s*(--|\\+\\+)\\s*)?_*([A-Za-z0-9]|__)+(\\.\\w|\\w|\\(([^\\)\\\"]|\\\".*\\\")*\\))*(\\s*(--|\\+\\+))?|\\\"[^\\\"]*\\\")\\s*)+((\\s|\\\\n|\\\\r)*(\\+|\\+\\+|-|--|\\*|\\/|%|&|\\||\\^|=|\\+=|-=|\\/=|\\*=|%=|&=|\\|=|\\^=|&&|\\|\\||!|<|<=|>|>=|==|!=)(\\s|\\\\n|\\\\r)*([\\(]*((\\s*(--|\\+\\+)\\s*)?_*([A-Za-z0-9]|__)+(\\.\\w|\\w|,|\\(([^\\)\\\"]|\\\".*\\\")*\\))*(\\s*(--|\\+\\+))?|\\\"[^\\\"]*\\\")(\\s|\\\\n|\\\\r)*\\)*)+(\\s|\\\\n|\\\\r)*\\)*)+(;|\\{)";
-	//final String regex = "[\\(]*((\\s*(--|\\+\\+)\\s*)?_*([A-Za-z0-9]|__)+(\\.\\w|\\w|\\(([^\\)\\\"]|\\\".*\\\")*\\))*(\\s*(--|\\+\\+))?|\\\"[^\\\"]*\\\")((\\s|\\\\n|\\\\r)*(\\+|\\+\\+|-|--|\\*|\\/|%|&|\\||\\^|=|\\+=|-=|\\/=|\\*=|%=|&=|\\|=|\\^=|&&|\\|\\||!|<|<=|>|>=|==|!=)(\\s|\\\\n|\\\\r)*[\\(]*((\\s*(--|\\+\\+)\\s*)?_*([A-Za-z0-9]|__)+(\\.\\w|\\w|\\(([^\\)\\\"]|\\\".*\\\")*\\))*(\\s*(--|\\+\\+))?|\\\"[^\\\"]*\\\")(\\s|\\\\n|\\\\r)*\\)*)+(\\s|\\\\n|\\\\r)*\\)*(;|\\{)";
-	final String incrementationCaseRegex = "[\\(]*(\\s*(--|\\+\\+)\\s*)_*([A-Za-z0-9]|__)+(\\.\\w|\\w|\\(([^\\)\\\"]|\\\".*\\\")*\\))*|[\\(]*_*([A-Za-z0-9]|__)+(\\.\\w|\\w|\\(([^\\)\\\"]|\\\".*\\\")*\\))*(\\s*(--|\\+\\+))\\s*(;|\\{|\\)|\\,)";
+	final String regex = "\\s*([\\(\\[]*((\\s*(--|\\+\\+)\\s*)?_*([A-Za-z0-9]|__)+(\\.\\w|\\w|\\(([^\\)\\\"]|\\\".*\\\")*\\)|\\[([^\\]\\\"]|\\\".*\\\")+\\])*(\\s*(--|\\+\\+))?|\\\"[^\\\"]*\\\")\\s*)+((\\s|\\\\n|\\\\r)*(\\+|\\+\\+|-|--|\\*|\\/|%|&|\\||\\^|=|\\+=|-=|\\/=|\\*=|%=|&=|\\|=|\\^=|&&|\\|\\||!|<|<=|>|>=|==|!=)(\\s|\\\\n|\\\\r)*([\\(]*((\\s*(--|\\+\\+)\\s*)?_*([A-Za-z0-9]|__)+(\\.\\w|\\w|,|\\(([^\\)\\\"]|\\\".*\\\")*\\)|\\[([^\\]\\\"]|\\\".*\\\")+\\])*(\\s*(--|\\+\\+))?|\\\"[^\\\"]*\\\")(\\s|\\\\n|\\\\r)*\\)*\\]*)+(\\s|\\\\n|\\\\r)*\\)*)+(;|\\{)";
+	final String incrementationCaseRegex = "[\\(\\[]*(\\s*(--|\\+\\+)\\s*)_*([A-Za-z0-9]|__)+(\\.\\w|\\w|\\(([^\\)\\\"]|\\\".*\\\")*\\)|\\[([^\\]\\\"]|\\\".*\\\")+\\])*|[\\(]*_*([A-Za-z0-9]|__)+(\\.\\w|\\w|\\(([^\\)\\\"]|\\\".*\\\")*\\)|\\[([^\\]\\\"]|\\\".*\\\")+\\])*(\\s*(--|\\+\\+))\\s*(;|\\{|\\)|\\,|\\])";
 	private int numCount;
 	private int logicalCount;
 	private int relationalCount;
@@ -28,9 +27,6 @@ public class ExpressionFinder{
 	
 	Matcher matcher;
 	Pattern pattern,incPattern;
-	//\(*_*([A-Za-z0-9]|__)+\w*((\s|\\n|\\r)*(\+|\+\+|-|--|\*|\/|%|&|\||\^|=|\+=|-=|\/=|\*=|%=|&=|\|=|\^=)(\s|\\n|\\r)*\(*_*[A-Za-z0-9__]+\w*(\s|\\n|\\r)*\)*)+(\s|\\n|\\r)*\)*(;|{)
-	
-	//static String operandRegex = "_*([A-Za-z0-9]|__)+\\w*";
 	public ExpressionFinder(String code ) {
 		this.code = code;
 		this.numCount = 0;
@@ -45,11 +41,9 @@ public class ExpressionFinder{
 	
 	public int Analyze(EOperator operatorType) {
 		matcher = pattern.matcher(code);
-		
 		//Removes expressions that are operations on incremented operators
         String cleaned = code;
         while (matcher.find()) {
-        	//System.out.println(matcher.group());
         	OF = new OperatorFinder(operatorType,matcher.group());
         	switch (operatorType) {
         	case numerical: 
@@ -75,7 +69,6 @@ public class ExpressionFinder{
         if(operatorType == EOperator.numerical || operatorType == EOperator.doubleOp) {
         	matcher = incPattern.matcher(cleaned);
         	while (matcher.find()) {
-            	//System.out.println(matcher.group());
             	OF = new OperatorFinder(operatorType,matcher.group());
             	switch (operatorType) {
             	case numerical: 

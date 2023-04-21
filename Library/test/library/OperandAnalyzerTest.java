@@ -119,15 +119,19 @@ class OperandAnalyzerTest {
 			document.read();
 			document.readAndCleanString();
 			document.AnalyzeOperands();
-			assertEquals(document.getNumberOfOperands(),39);
+			assertEquals(document.getNumberOfOperands(),41);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		
+		}	
 	}
 	
-	
-
+	@ParameterizedTest
+	@Tag("ParameterizedTest")
+	@DisplayName("Tests with brackets")
+	@CsvSource(value={"int a = array[5] - 10;:3","number[getLength(\"word\")] = 2;:2","result = array[index]--;:3","int i = array[1]++ - 10;:4","System.out.print(array[index++]);:1","System.out.print(array[index++ + arr[2]]);:3"},delimiter=':')
+	void testWithArrays(String code,int count) {
+		OA = new OperandAnalyzer(code);
+		assertEquals(OA.Analyze(),count);
+	}	
 }
